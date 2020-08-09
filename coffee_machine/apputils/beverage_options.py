@@ -24,9 +24,12 @@ class BeverageOptionsImpl:
         return self._beverages
 
     def display_options(self):
-        display_data = '0.Refill\n'
+        display_data=''
         for idx, beverage in self._beverages.items():
             display_data += str(idx) + '.' + beverage.name + '\n'
+        display_data += "--------\n"
+        display_data += '{0}.Refill\n'.format(idx+1)
+        display_data += '{0}.Show_Inventory\n'.format(idx+2)
         print("Dispenser is ready to serve. Please enter an option number")
         print(display_data)
 
@@ -34,7 +37,7 @@ class BeverageOptionsImpl:
         print(">>>", end='')
         try:
             input_option = int(input())
-            assert (0 <= input_option <= len(self._beverages))
+            assert (0 <= input_option <= len(self._beverages) + 2)
         except:
             raise InvalidInputOptionException
 

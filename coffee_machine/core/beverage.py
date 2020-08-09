@@ -6,7 +6,6 @@ class Beverage:
 
     def __init__(self, name, ingredients, preparation_time=10, dispensing_time=3):
         self._name = name
-        assert(type(ingredients), list)
         for beverage_ingredient in ingredients:
             if type(beverage_ingredient) is not Ingredient:
                 raise TypeError(

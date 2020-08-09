@@ -48,6 +48,6 @@ def create_logger(logdir='logs', log_filename='sample'):
     logfile = os.path.join(logdir, log_filename + '.log')
     load_logger_cfg(logfile)
     logger = logging.getLogger()
-    logger.info("Log file for this run: " + os.path.realpath(logfile))
+    logger.debug("Log file for this run: " + os.path.realpath(logfile))
 
     return logger

@@ -36,12 +36,15 @@ class CoffeeMachine:
             try:
                 # read an option from stdin
                 input_option = self._beverage_options_impl.read_option()
-                if input_option == 0:
+                num_beverages = self._beverage_impl.num_beverages
+                if input_option == num_beverages + 1:
                     #refill request
                     refill_ingredient_request = read_ingredient_refill_request(list(self._ingredient_stock_impl.get_inventory_ingredient_dict().keys()))
                     self._ingredient_stock_impl.refill_ingredient_stock(refill_ingredient_request)
                     logger.info("Successfully refilled")
                     logger.debug(self._ingredient_stock_impl.get_inventory_details_msg())
+                elif input_option == num_beverages + 2:
+                    logger.info(self._ingredient_stock_impl.get_inventory_details_msg())
                 else:
                     requested_beverage_name = self._beverage_dict[input_option].name
                     seek_beverage = SeekBeverage(requested_beverage_name)
@@ -79,8 +82,8 @@ class CoffeeMachine:
             logger.debug(self._ingredient_stock_impl.get_inventory_details_msg())
 
             # Step3: Launch a thread to dispense the requested_beverage from the above obtained free_outlet
-            thread1 = self.custom_thread(self._beverage_impl, free_outlet, requested_beverage)
-            thread1.start()
+            cust_thread = self.custom_thread(self._beverage_impl, free_outlet, requested_beverage)
+            cust_thread.start()
             try:
                 time.sleep(0.5)
             except:

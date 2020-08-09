@@ -7,12 +7,17 @@ logger = logging.getLogger()
 class BeverageImpl:
     def __init__(self, beverages, ingredient_stock_dict):
         self._beverages_map = OrderedDict()
+        self._num_beverages = len(beverages)
         self._init_beverages_map(beverages)
         self._ingredient_stock_dict = ingredient_stock_dict
 
     def _init_beverages_map(self, beverages):
         for beverage in beverages:
             self._beverages_map[beverage.name] = beverage
+
+    @property
+    def num_beverages(self):
+        return self._num_beverages
 
     def dispense_beverage(self, outlet, requested_beverage):
         beverage = self._beverages_map[requested_beverage.name]
@@ -27,7 +32,7 @@ class BeverageImpl:
             stock_ingredient = self._ingredient_stock_dict[ingredient.name]
             if not stock_ingredient.is_consumable(ingredient.quantity):
                 insufficient_ingredients.append(stock_ingredient.name)
-                ingredient_insufficient_msg = "{0} cannot be prepared because {1} is not sufficient".format(beverage.name,  stock_ingredient.name)
+                ingredient_insufficient_msg = "{0} cannot be prepared because item {1} is not sufficient".format(beverage.name,  stock_ingredient.name)
 
         if not insufficient_ingredients and not unavailable_ingredient_flag:
             # all ingredients are available in sufficient quantities
