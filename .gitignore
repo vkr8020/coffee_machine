@@ -3,5 +3,6 @@ logs/
 *.log
 *.tar
 __pycache__/
+coffe_machine.egg-info/
 .cache
 .idea/
