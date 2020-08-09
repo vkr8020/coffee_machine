@@ -1,0 +1,7 @@
+logs/
+*.pyc
+*.log
+*.tar
+__pycache__/
+.cache
+.idea/
