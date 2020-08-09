@@ -26,22 +26,22 @@ class Outlet:
     def state(self):
         return self._state
 
-    @state.setter
-    def state(self, s):
+    def set_state(self, s):
         self._state = s
 
     def dispense_beverage(self, beverage):
-        assert(type(beverage), Beverage)
-        print(beverage.name + "is being prepared. Dispensing on Outlet:{0}".format(self.id) + ".....")
-        time.sleep(beverage.preparation_time) # set for 1000ms
-        print("Success: Dispensed {0} on Outlet {1}".format(beverage.name, self.id))
+        print(beverage.name + " is being prepared and will be dispensed at Outlet:{0}".format(self.id))
+        time.sleep(beverage.preparation_time) # set for 7sec by default
+        print("Success: {0} is prepared and dispensing on Outlet {1} ...".format(beverage.name, self.id))
+        time.sleep(beverage.dispensing_time) # set to 3 sec by default
+        self.release_lock()
 
     def acquire_lock(self):
         if self.state == self.State.FREE:
-            self.state(self.State.RUNNING)
+            self.set_state(self.State.RUNNING)
         else:
             raise OutletBusyException("Error: Trying to acquire a lock for outlet which is busy")
 
     def release_lock(self):
         if self.state == self.State.RUNNING:
-            self.state(self.state.FREE)
+            self.set_state(self.state.FREE)

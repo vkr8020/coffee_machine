@@ -41,18 +41,13 @@ def load_logger_cfg(log_filename):
     logging.config.dictConfig(d)
 
 
-def create_logger(logdir='logs', log_filename='sample', verbose=False):
+def create_logger(logdir='logs', log_filename='sample'):
     if not os.path.exists(logdir):
         os.makedirs(logdir)
 
     logfile = os.path.join(logdir, log_filename + '.log')
     load_logger_cfg(logfile)
     logger = logging.getLogger()
-
-    if verbose:
-        logger.setLevel(logging.DEBUG)
-    else:
-        logger.setLevel(logging.INFO)
     logger.info("Log file for this run: " + os.path.realpath(logfile))
 
     return logger

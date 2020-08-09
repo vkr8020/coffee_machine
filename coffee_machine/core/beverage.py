@@ -1,13 +1,11 @@
-from .ingredient import Ingredient
+from coffee_machine.core.ingredient import Ingredient
 
 
 class Beverage:
     _preparation_time: int
 
-    def __init__(self, name, ingredients, preparation_time=1000):
-        assert(type(name), str)
+    def __init__(self, name, ingredients, preparation_time=10, dispensing_time=3):
         self._name = name
-
         assert(type(ingredients), list)
         for beverage_ingredient in ingredients:
             if type(beverage_ingredient) is not Ingredient:
@@ -19,6 +17,7 @@ class Beverage:
         self._ingredients = ingredients
         # preparation time is in ms(milliseconds)
         self._preparation_time = preparation_time
+        self._dispensing_time = dispensing_time
 
     @property
     def __repr__(self):
@@ -42,3 +41,7 @@ class Beverage:
     @property
     def preparation_time(self):
         return self._preparation_time
+
+    @property
+    def dispensing_time(self):
+        return self._dispensing_time

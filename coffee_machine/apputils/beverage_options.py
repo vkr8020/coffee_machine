@@ -1,3 +1,4 @@
+from collections import OrderedDict
 from coffee_machine.core.beverage import Beverage
 from coffee_machine.apputils.exceptions import InvalidInputOptionException
 
@@ -7,12 +8,25 @@ class BeverageOptionsImpl:
         assert (isinstance(beverages, list))
         for beverage in beverages:
             assert (isinstance(beverage, Beverage))
-        self._beverages = beverages
+        self._beverages = OrderedDict()
+        self._construct_beverage_dict(beverages)
+
+    def _construct_beverage_dict(self, beverages):
+        """
+        :param beverages: a list of Beverages
+        construct a dict with key as index and value as Beverage
+        :return:
+        """
+        for idx, beverage in enumerate(beverages):
+            self._beverages[idx + 1] = beverage
+
+    def get_beverage_dict(self):
+        return self._beverages
 
     def display_options(self):
         display_data = '0.Refill\n'
-        for idx, beverage in enumerate(self._beverages):
-            display_data += str(idx+1) + '.' + beverage.name + '\n'
+        for idx, beverage in self._beverages.items():
+            display_data += str(idx) + '.' + beverage.name + '\n'
         print("Dispenser is ready to serve. Please enter an option number")
         print(display_data)
 

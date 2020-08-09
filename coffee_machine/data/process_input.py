@@ -1,6 +1,5 @@
-import os
-
 from coffee_machine.core.ingredient import Ingredient
+from coffee_machine.core.stock_ingredient import StockIngredient
 from coffee_machine.core.beverage import Beverage
 from coffee_machine.core.machine_configuration import MachineConfiguration
 from coffee_machine.core.utils import read_jsonfile
@@ -12,7 +11,7 @@ class ParseJSONConfiguration:
 
     def _process_data(self, data):
         try:
-            self.N = data['machine']['outlets']['count_n']
+            self.num_outlets = data['machine']['outlets']['count_n']
         except:
             raise KeyError("number of outlets is not found in the given config data")
 
@@ -20,7 +19,7 @@ class ParseJSONConfiguration:
             inv_dict = data['machine']['total_items_quantity']
             self.inventory = []
             for ingredient_name, quantity in inv_dict.items():
-                self.inventory.append(Ingredient(ingredient_name, quantity))
+                self.inventory.append(StockIngredient(ingredient_name, quantity))
         except:
             raise Exception("Error in reading the total_items_quantity section from json data")
 
@@ -37,14 +36,14 @@ class ParseJSONConfiguration:
 
     @property
     def get_parsed_data(self):
-        return self.N, self.inventory, self.beverages
+        return self.num_outlets, self.inventory, self.beverages
 
 
 def get_machine_configuration(inpfile):
     # read the json file
     json_data = read_jsonfile(inpfile)
     # parse the obtained json data and generate machine configuration from it
-    N, inventory, beverages = ParseJSONConfiguration(json_data).get_parsed_data
-    machine_config = MachineConfiguration(N, inventory, beverages)
+    num_outlets, inventory, beverages = ParseJSONConfiguration(json_data).get_parsed_data
+    machine_config = MachineConfiguration(num_outlets, inventory, beverages)
 
     return machine_config

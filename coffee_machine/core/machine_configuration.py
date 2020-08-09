@@ -1,5 +1,6 @@
-from .ingredient import Ingredient
-from .beverage import Beverage
+from coffee_machine.core.ingredient import Ingredient
+from coffee_machine.core.stock_ingredient import StockIngredient
+from coffee_machine.core.beverage import Beverage
 
 
 class MachineConfiguration:
@@ -19,9 +20,9 @@ class MachineConfiguration:
         assert(type(inventory), list)
         # Assuming that this machine will have an inventory of only Ingredients
         for inv_item in inventory:
-            if type(inv_item) is not Ingredient:
+            if type(inv_item) is not StockIngredient:
                 raise TypeError(
-                    "Expected beverage ingredient type to be Ingredient but got {0}".format(
+                    "Expected beverage ingredient type to be StockIngredient but got {0}".format(
                         type(inv_item)))
         self._inventory = inventory
 
@@ -29,7 +30,7 @@ class MachineConfiguration:
         for beverage_item in beverages:
             if type(beverage_item) is not Beverage:
                 raise TypeError(
-                    "Expected beverage ingredient type to be Ingredient but got {0}".format(
+                    "Expected beverage item type to be Beverage but got {0}".format(
                         type(beverage_item)))
         self._beverages = beverages
 
