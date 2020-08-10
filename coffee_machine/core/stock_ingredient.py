@@ -11,7 +11,7 @@ class StockIngredient:
     def __init__(self, name, quantity):
         self._name = name
         self._quantity = quantity
-        self._min_quantity = 10 # if the current quantity is below this amount(10ml), raises a refill request
+        self._min_quantity = 5 # if the current quantity is below this amount(5ml), raises a refill request
 
     @property
     def name(self):
