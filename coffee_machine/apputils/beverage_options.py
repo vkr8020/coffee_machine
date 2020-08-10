@@ -8,7 +8,6 @@ class BeverageOptionsImpl:
     A class which has functionality to display the beverage options, read/interpret them
     """
     def __init__(self, beverages):
-        assert (isinstance(beverages, list))
         for beverage in beverages:
             assert (isinstance(beverage, Beverage))
         self._beverages = OrderedDict()
