@@ -1,6 +1,6 @@
 ## Coffee Machine Simulation:
 
-### Setup:
+### Setup in Linux Environment:
 ```
 git clone https://github.com/vkr8020/coffee_machine.git
 cd coffee_machine
