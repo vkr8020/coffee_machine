@@ -5,6 +5,10 @@ from coffee_machine.core.refill_ingredient_request import RefillIngredientReques
 
 
 def read_jsonfile(inpfile):
+    """
+    :param inpfile: and input json file
+    :return: json data in dict format
+    """
     if not os.path.exists(inpfile):
         raise FileNotFoundError("Couldn\'t find the {0} file".format(inpfile))
     try:
@@ -19,7 +23,7 @@ def read_jsonfile(inpfile):
 def read_ingredient_refill_request(stock_ingredients):
     """
     :param stock_ingredients: a list of inventory ingredients name
-    :return:
+    :return: refill ingredient request
     """
     display_data = ''
     for idx, ingredient_name in enumerate(stock_ingredients):

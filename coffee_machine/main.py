@@ -1,4 +1,8 @@
-### Coffee Machine Simulation ###
+"""
+Coffee Machine Simulation
+Author: Vinay.Reddy
+
+"""
 import logging
 import sys
 
@@ -20,8 +24,10 @@ def main():
         exit(0)
     # json file
     user_input_file = sys.argv[1]
+    # load machine configuration from user input file
     machine_config = get_machine_configuration(user_input_file)
     my_coffee_machine = CoffeeMachine(machine_config)
+    # start the machine
     my_coffee_machine.run()
 
 

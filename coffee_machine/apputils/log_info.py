@@ -4,6 +4,11 @@ import logging.config
 
 
 def load_logger_cfg(log_filename):
+    """
+    Load logger configuration
+    :param log_filename:log filename
+    :return:
+    """
     d = {
         'version': 1,
         'formatters': {
@@ -42,6 +47,11 @@ def load_logger_cfg(log_filename):
 
 
 def create_logger(logdir='logs', log_filename='sample'):
+    """
+    :param logdir: custom logdir name
+    :param log_filename: custom log filename
+    :return: logger
+    """
     if not os.path.exists(logdir):
         os.makedirs(logdir)
 

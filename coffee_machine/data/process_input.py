@@ -6,6 +6,9 @@ from coffee_machine.core.utils import read_jsonfile
 
 
 class ParseJSONConfiguration:
+    """
+    THis class parses the json input and extracts the data in a required format.
+    """
     def __init__(self, data):
         self._process_data(data)
 
@@ -40,6 +43,10 @@ class ParseJSONConfiguration:
 
 
 def get_machine_configuration(inpfile):
+    """
+    :param inpfile: json file
+    :return: machine configuration
+    """
     # read the json file
     json_data = read_jsonfile(inpfile)
     # parse the obtained json data and generate machine configuration from it

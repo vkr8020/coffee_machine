@@ -17,7 +17,6 @@ class MachineConfiguration:
         assert (outlets > 0)
         self._outlets = outlets
 
-        assert(type(inventory), list)
         # Assuming that this machine will have an inventory of only Ingredients
         for inv_item in inventory:
             if type(inv_item) is not StockIngredient:
@@ -26,20 +25,12 @@ class MachineConfiguration:
                         type(inv_item)))
         self._inventory = inventory
 
-        assert(type(beverages), list)
         for beverage_item in beverages:
             if type(beverage_item) is not Beverage:
                 raise TypeError(
                     "Expected beverage item type to be Beverage but got {0}".format(
                         type(beverage_item)))
         self._beverages = beverages
-
-    def __str__(self):
-        """
-        return the machine configuration
-        :return:
-        """
-        return "Number of outlets are:{0}".format(self._outlets)
 
     @property
     def outlets(self):

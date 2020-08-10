@@ -4,6 +4,9 @@ from coffee_machine.apputils.exceptions import InvalidInputOptionException
 
 
 class BeverageOptionsImpl:
+    """
+    A class which has functionality to display the beverage options, read/interpret them
+    """
     def __init__(self, beverages):
         assert (isinstance(beverages, list))
         for beverage in beverages:
@@ -24,6 +27,10 @@ class BeverageOptionsImpl:
         return self._beverages
 
     def display_options(self):
+        """
+        print various options
+        :return:
+        """
         display_data=''
         for idx, beverage in self._beverages.items():
             display_data += str(idx) + '.' + beverage.name + '\n'
@@ -34,6 +41,9 @@ class BeverageOptionsImpl:
         print(display_data)
 
     def read_option(self):
+        """
+        :return: valid input option
+        """
         print(">>>", end='')
         try:
             input_option = int(input())

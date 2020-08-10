@@ -8,6 +8,9 @@ logger = logging.getLogger()
 
 
 class OutletImpl:
+    """
+    This class has some of the outlet related information and functionalities
+    """
     def __init__(self, num_outlets):
         assert (num_outlets > 0)
         self._num_outlets = num_outlets
@@ -19,10 +22,18 @@ class OutletImpl:
         return self._num_outlets
 
     def _setup_outlets(self):
+        """
+        Set all outlets initially in FREE state
+        :return:
+        """
         for i in range(1, self.num_outlets + 1):
             self._outlets[i] = Outlet(i, Outlet.State.FREE)
 
     def get_free_outlet(self):
+        """
+        wait until a free outlet is available and return that specific outlet
+        :return: Outlet
+        """
         free_outlet = None
         while True:
             try:
@@ -37,6 +48,10 @@ class OutletImpl:
         return free_outlet
 
     def _check_free_outlet_and_acquire_lock(self):
+        """
+        Look for a free outlet and return one otherwise raise an exception
+        :return:
+        """
         free_outlet = None
         for outlet in self._outlets.values():
             if outlet.state == Outlet.State.FREE:

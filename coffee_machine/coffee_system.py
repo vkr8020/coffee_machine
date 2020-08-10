@@ -18,6 +18,7 @@ class CoffeeMachine:
         self.machine_configuration = machine_configuration
         assert(isinstance(name, str))
         self._name = name
+
         self._num_threads = self.machine_configuration.outlets
         self._beverage_options_impl = BeverageOptionsImpl(self.machine_configuration.beverages)
         self._beverage_dict = self._beverage_options_impl.get_beverage_dict() # a dict with key as integer and values as Beverage objects
@@ -30,6 +31,10 @@ class CoffeeMachine:
         return self._name
 
     def _get_user_beverage_request(self):
+        """
+        get input from the user , process it and retrun a beverage request accordingly
+        :return: beverage request
+        """
         while True:
             # display options
             self._beverage_options_impl.display_options()
@@ -55,6 +60,9 @@ class CoffeeMachine:
         return seek_beverage
 
     class custom_thread(threading.Thread):
+        """
+        Custom thread to dispense a beverage through an outlet
+        """
         def __init__(self, beverage_impl, free_outlet, requested_beverage):
             threading.Thread.__init__(self)
             self.beverage_impl = beverage_impl
@@ -71,7 +79,10 @@ class CoffeeMachine:
                 logger.info(str(e))
 
     def run(self):
-
+        """
+        main logic
+        :return:
+        """
         while True:
             # Step1: look out for a free outlet
             free_outlet = self._outlet_impl.get_free_outlet()

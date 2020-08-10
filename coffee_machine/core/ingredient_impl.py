@@ -2,6 +2,10 @@ from collections import OrderedDict
 
 
 class IngredientStockImpl:
+    """
+    A class which holds the information about inventory stock.
+    This supports refilling an ingredient stock, get inventory details.
+    """
     def __init__(self, inventory):
         self._ingredient_stock_dict = OrderedDict()
         self._init_ingredient_stock_dict(inventory)
@@ -20,6 +24,9 @@ class IngredientStockImpl:
         return self._ingredient_stock_dict
 
     def get_inventory_details_msg(self):
+        """
+        :return: full inventory details
+        """
         msg = "Current Items in Inventory are:\n"
         for stock_ingredient in self._ingredient_stock_dict.values():
             msg += str(stock_ingredient) + '\n'
@@ -28,7 +35,7 @@ class IngredientStockImpl:
 
     def refill_ingredient_stock(self, refill_ingredient_request):
         """
-        Assuming that only the item names that are already existing in the inventory can be refilled.
+        Assuming that only the item names that are already existing in the inventory (i.e stock ingredient names mentioned in the json file) can be refilled.
         :param refill_ingredient_request:
         :return:
         """

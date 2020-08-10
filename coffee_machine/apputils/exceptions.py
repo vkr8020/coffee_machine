@@ -20,12 +20,21 @@ class IngredientShortageException(Exception):
 
 
 class OutletBusyException(Exception):
+    """
+    This exception is raised when all outlets are in PROCESSING state
+    """
     pass
 
 
 class FileHandlingException(Exception):
+    """
+    This exception is raised when we can't read/handle the input file
+    """
     pass
 
 
 class InvalidInputOptionException(Exception):
+    """
+    This exception is raised when the given user input option is invalid
+    """
     pass

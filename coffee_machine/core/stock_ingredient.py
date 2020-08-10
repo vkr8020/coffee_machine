@@ -5,10 +5,13 @@ lock = Lock()
 
 
 class StockIngredient:
+    """
+    This class is for handling the Inventory Ingredients
+    """
     def __init__(self, name, quantity):
         self._name = name
         self._quantity = quantity
-        self._min_quantity = 10
+        self._min_quantity = 10 # if the current quantity is below this amount(10ml), raises a refill request
 
     @property
     def name(self):

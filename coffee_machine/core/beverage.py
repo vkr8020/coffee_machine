@@ -2,6 +2,11 @@ from coffee_machine.core.ingredient import Ingredient
 
 
 class Beverage:
+    """
+    A class for Beverage.
+    This holds all the information about its ingredients, time required
+    to prepare a beverage and dispense it.
+    """
     _preparation_time: int
 
     def __init__(self, name, ingredients, preparation_time=10, dispensing_time=3):
